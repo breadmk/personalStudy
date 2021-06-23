@@ -1,0 +1,21 @@
+.alert-box{
+    background:rgb(176, 176, 255);
+    color:blueviolet;
+    padding: 20px;
+    border-radius: 5px;
+    display: none;
+}
+.alert-box1{
+    background:rgb(176, 176, 255);
+    color:blueviolet;
+    padding: 20px;
+    border-radius: 5px;
+    display: none;
+}
+.alert-box2{
+    background:rgb(176, 176, 255);
+    color:blueviolet;
+    padding: 20px;
+    border-radius: 5px;
+    display: none;
+}
