@@ -1,0 +1,26 @@
+.main-background{
+    width: 100%;
+    height: 500px;
+    background-image: url(../img/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    padding-top: 150px;
+}
+body{
+    margin:0px;
+}
+.main-title-box{
+        text-align: center;
+}
+.main-title{
+    color: white;
+    font-size: 30px;
+    margin: 0px;
+}
+.main-content{
+    padding: 20px;
+    color:white;
+    font-size: 15px;
+}

@@ -8,6 +8,7 @@
 }
 .blog-pic{
     float: left;
+    width: 50px;
 }
 .blog-title{
     clear: both;
@@ -21,4 +22,21 @@
     width: 20%;
     height: 200px;
     float: left;
+}
+.li-inline li{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+}
+.navbar{
+    width: 800px;
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.li-inline a{
+    text-decoration: none;
+}
+.li-inline a:visited{
+    color: black;
 }
