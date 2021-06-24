@@ -24,3 +24,21 @@ body{
     color:white;
     font-size: 15px;
 }
+.main-button{
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: white;
+    border: none;
+    border-radius: 12px;
+    display: block;
+    margin: auto;
+
+}
+.position{
+    /* position: relative; */
+    /* position: absolute; 내 부모의 기준으로 달라붙음 positon: relative 가지고 있는 부모에게 달라붙음*/
+    /* position: fixed; 고정할때 사용 */
+    /* bottom: -100px; */
+    top: 15px;
+}
