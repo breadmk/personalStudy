@@ -7,6 +7,7 @@
     background-position: center;
     background-attachment: fixed;
     padding-top: 150px;
+    position: relative;
 }
 body{
     margin:0px;
@@ -30,15 +31,38 @@ body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: white;
     border: none;
-    border-radius: 12px;
-    display: block;
+    border-radius: 5px;
     margin: auto;
-
+    display: block;
 }
 .position{
-    /* position: relative; */
-    /* position: absolute; 내 부모의 기준으로 달라붙음 positon: relative 가지고 있는 부모에게 달라붙음*/
-    /* position: fixed; 고정할때 사용 */
-    /* bottom: -100px; */
-    top: 15px;
+    /* position으로 기준점을 미리 정해야함 
+        기본값은 default
+        position을 놓으면 붕떠서 움직임.
+        position: fixed; 스크롤할때도 고정됨.
+        position: absolute; <- relative 가지고 있는 부모한테 달라붙어서 기준이 생김.
+        position: relative; <- absolute가 가서 달라붙음.
+
+    */
+    position: relative;
+    top: 150px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 150px;
+}
+.sub-div{
+    background: rgb(195, 200, 199);
+    max-width: 600px;
+    position: relative;
+    width: 80%;
+    height: 300px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    top:-20px;
+    box-sizing: border-box; 
+    /* 기본설정 box-sizing: content-box;
+       정확한 박스설정 box-sizing: border-box; 
+    */
 }
