@@ -4,9 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Document</title>
 </head>
 <body>
     
+=======
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="hello">안녕하세요</h2>
+    <h2 id="hi">올때메로나</h2>
+    <div class="alert-box" id="alert">Alert 박스
+        <button onclick="알림창열기('none')">닫기</button>
+    </div>
+    
+      <div class="alert-box" id="alert2">
+        <p id="content">dd</p>
+        <button id="close">X</button>
+    </div>
+
+    <button onclick="알림창열기('block')">click</button></br>
+    <button onclick="아이디('아이디를 입력하세요')">아이디</button>
+    <button onclick="아이디('비밀번호를 입력하세요')">비번</button>
+    <script>
+        document.getElementById('hello').innerHTML = '안녕';
+        document.getElementById('hello').style.fontSize = "30px";
+        document.getElementById('hi').innerHTML="올때바밤바";
+
+        function 알림창열기(구멍,구멍2){
+            document.getElementById('alert').style.display = 구멍;
+            document.getElementById('alert2').style.display = 구멍2;
+
+        }
+
+        function plus(구멍){
+            2 + 구멍
+        }
+        plus(1);
+        plus(2);
+        
+        function 아이디(구멍2){
+            document.getElementById('alert2').style.display='block';
+            document.getElementById('content').innerHTML =구멍2;
+        }
+        
+        document.getElementById('close').addEventListener('click',function(){
+            document.getElementById('alert2').style.display='none';
+        });
+
+    </script>
+>>>>>>> js/jquery
 </body>
 </html>
