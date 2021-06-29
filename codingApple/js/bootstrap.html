@@ -17,6 +17,26 @@
 
 <body>
 
+    <div class="left-menu">
+        <p>Menu Title</p>
+    </div>
+
+
+
+
+    <!-- <p id="hi">안녕</p> -->
+
+    <script>
+        /*
+        $("#hi").click(function(){
+            $("#hi").animate({ marginTop: "100px" }, 5000); 
+            //$("#hi").animate({ marginTop: "100px" }, 5000); (5초에 걸쳐서 움직이게 ms)
+            //자스에서는 - 가 뺏셈처리 되서 css와 다르게 붙여서 카멜식으로 작성
+        });
+
+        */
+    </script>
+
     <div class="black-background">
         <div class="white-background">
             <p>로그인하세요</p>
@@ -57,7 +77,8 @@
         featured content or information.</p>
     <hr class="my-4">
     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Login</a>
+    <a id="login" class="btn btn-primary btn-lg" href="#" role="button">Login</a>
+    <a id="show-menu" class="btn btn-danger btn-lg" href="#" role="button">Show Menu</a>
 
     
 </div>
@@ -76,13 +97,25 @@
             }
         })
 
-
+        $("#show-menu").on('click',function(){
+            $(".left-menu").animate({ marginLeft:"0px"}, 1000)
+        })
       
         
-        $(".btn-lg").on('click',function(){
+        $("#login").on('click',function(){
             // $('.black-background').css('display','block');
             // $('.black-background').show();
-            $('.black-background').fadeIn(); //fadeOut(사라지기) // slideDown();
+            // $('.black-background').fadeIn(); //fadeOut(사라지기) // slideDown();
+
+
+            /* $('.black-background').show().animate({ marginTop:'0px' }) 
+            이전방식 보통 css로 함 */
+        
+            // $('.black-background').css('transform','translateY(0px)');
+
+            //보통 이방식을 선호함.
+            $('.black-background').addClass("slide-down");
+
         });
         
         $("#nav-sub-button").click(function(){
