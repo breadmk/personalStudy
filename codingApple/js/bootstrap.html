@@ -44,11 +44,11 @@
             <form action="bootstrap.html" id="first-form">
                 <div class="form-group">
                     <input type="text" class="form-control form-email" placeholder="Email">
-                    <p id="email-alert">이메일이 빈칸입니다.</p>
+                    <p id="email-alert">이메일 형식이 아닙니다.</p>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control form-password" placeholder="Password">
-                    <p id="password-alert">비밀번호가 빈칸입니다.</p>
+                    <p id="password-alert">비밀번호는 대문자가 있어야합니다.</p>
                 </div>
                 <button class="btn btn-primary">전송</button>
                 <button class="btn btn-danger modal-close">닫기</button>
@@ -98,11 +98,19 @@
                 
             // 정규식을 이용한 이메일 체크
             var 입력한이메일 = $('.form-email').val();
-            if( /\S+@\S+\.\S+/.test(입력한이메일) == false ){
-                e.preventDefault();
+            if( /\S+@\S+\.\S+/.test(입력한이메일) == false){
                 $("#email-alert").show();
+                e.preventDefault();
+
+                // /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i       <-- 정규식 이메일 검사
+            }else if( 입력한이메일 ==''){
+                e.preventDefault();
             }
-        
+            var 입력한비밀번호 = $('.form-password').val();
+            if(/[A-Z]+/.test(입력한비밀번호)==false){
+                $("#password-alert").show();
+                 e.preventDefault();
+            }
         })
 
 
