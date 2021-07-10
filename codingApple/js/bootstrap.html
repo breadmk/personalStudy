@@ -79,8 +79,33 @@
     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
     <a id="login" class="btn btn-primary btn-lg" href="#" role="button">Login</a>
     <a id="show-menu" class="btn btn-danger btn-lg" href="#" role="button">Show Menu</a>
+</div>
 
-    
+    <h4 class="my-4 text-center">Showcase</h4>
+    <!-- overflow: hidden (아래 하단 스크롤바 제거) 넘치는것을 제거해줌-->
+    <div style="overflow: hidden; position: relative;">
+
+        <div class="slide-container">
+            <div class="slide-box">
+                <img src="img/IU1.jpg">
+            </div>
+            <div class="slide-box">
+                <img src="img/IU2.jpg">
+            </div>
+            <div class="slide-box">
+                <img src="img/suzy.jpg">
+            </div>
+        </div>
+        <button class="slide-next">></button>
+        <button class="slide-previous"><</button>
+    </div>
+
+<button class="slide-1">1</button>
+<button class="slide-2">2</button>
+<button class="slide-3">3</button>
+
+<div class="my-5">
+
 </div>
 
     <script>
@@ -153,6 +178,71 @@
             $(".black-background").fadeOut();
         })
 
+        $(".slide-1").click(function () {
+            $(".slide-container").css('transform', 'translateX(0vw)')
+        });
+
+        $(".slide-2").click(function(){
+            $(".slide-container").css('transform','translateX(-100vw)')
+        });
+
+        $(".slide-3").click(function () {
+            $(".slide-container").css('transform', 'translateX(-200vw)')
+        });
+
+        var 지금보이는사진 = 1;
+
+        $(".slide-next").click(function(){
+
+            $(".slide-container").css('transform', 'translateX(-'+ 지금보이는사진 + '00vw)');
+            지금보이는사진 = 지금보이는사진+1;
+            if( 지금보이는사진 ==3) {
+                 $(".slide-next").attr("disabled", "disabled");
+            } else if (지금보이는사진 != 3) {
+                $(".slide-previous").removeAttr("disabled");
+            }
+
+            // if( 지금보이는사진 == 1  ){
+            //   $(".slide-container").css('transform', 'translateX(-100vw)');
+            //   지금보이는사진 = 2;
+            // }else if( 지금보이는사진 == 2 ){
+            //   $(".slide-container").css('transform', 'translateX(-200vw)')
+            //   지금보이는사진 = 3;
+            // }else if( 지금보이는사진 ==3 ){
+            //     $(".slide-container").css('transform', 'translateX(0vw)');
+            //     지금보이는사진= 1;
+            // }
+
+
+        })
+
+        $(".slide-previous").click(function(){
+
+             $(".slide-container").css('transform', 'translateX(-' + (지금보이는사진-2) + '00vw)');
+
+            지금보이는사진 = 지금보이는사진 - 1;
+            if(지금보이는사진==1){
+                $(".slide-previous").attr("disabled", "disabled");
+            }else if(지금보이는사진 !=1){
+                $(".slide-next").removeAttr("disabled");
+            }
+
+            
+
+
+
+
+            // if( 지금보이는사진==1){
+            //     $(".slide-container").css('transform', 'translateX(-200vw)');
+            //     지금보이는사진=3;
+            // }else if( 지금보이는사진==2){
+            //     $(".slide-container").css('transform', 'translateX(0vw)');
+            //     지금보이는사진=1;
+            // }else if( 지금보이는사진==3 ){
+            //     $(".slide-container").css('transform', 'translateX(-100vw)');
+            //     지금보이는사진=2;
+            // }
+        })
 
     </script>
     <!-- Optional JavaScript -->
