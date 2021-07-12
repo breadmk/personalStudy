@@ -34,4 +34,5 @@ app.post('/add',function(요청,응답){
     console.log(요청.body);
     응답.send('전송완료')
     // 응답.send(요청.body);
+    
 })
