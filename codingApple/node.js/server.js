@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 // app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.set('view engine','ejs');
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -56,14 +57,21 @@ app.get('/write',function(요청,응답){
 });
 
 app.post('/add',function(요청,응답){
-    var test = 요청.body;
+    let test = 요청.body;
     console.log(test);
     응답.send('전송완료')
     db.collection('post').insertOne( test ,function(에러,결과){ 
         console.log('저장완료');
     }); 
-    
 })
 
-// 어떤 사람이 /add 라는 경로로 post 요청을 하면, 데이터 2개(제목,날짜)를 보내주는데, 이 때, post라는 이름을 가진 collection에 2개 데이터를 저장하기
-// {제목:'어쩌구' , 날짜: '어쩌구}
+app.get('/list',function(req,res){
+    //디비에 저장된 post라는 collection안에 저장된 데이터를 꺼내주세요.
+    db.collection('post').find().toArray(function(err,data){
+        console.log(data);
+        res.render('list.ejs',{ posts : data });
+    });
+
+   
+    
+})
