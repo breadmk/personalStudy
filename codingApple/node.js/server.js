@@ -57,13 +57,19 @@ app.get('/write',function(요청,응답){
 });
 
 app.post('/add',function(요청,응답){
-    let test = 요청.body;
-    console.log(test);
     응답.send('전송완료')
-    db.collection('post').insertOne( test ,function(에러,결과){ 
+    db.collection('counter').findOne({name : '게시물갯수'},function(err,data){
+        console.log(data.totalPost);
+        let totalCount = data.totalPost;
+
+        db.collection('post').insertOne( { _id:totalCount+1, 제목:요청.body.title,날짜:요청.body.date} ,function(에러,결과){ 
         console.log('저장완료');
     }); 
-})
+        //수정할차례
+
+  });
+    
+});
 
 app.get('/list',function(req,res){
     //디비에 저장된 post라는 collection안에 저장된 데이터를 꺼내주세요.
