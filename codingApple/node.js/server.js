@@ -63,21 +63,26 @@ app.post('/add',function(요청,응답){
         let totalCount = data.totalPost;
 
         db.collection('post').insertOne( { _id:totalCount+1, 제목:요청.body.title,날짜:요청.body.date} ,function(에러,결과){ 
-        console.log('저장완료');
+            console.log('저장완료');
+            db.collection('counter').updateOne({ name : '게시물갯수' },{ $inc : { totalPost : 1 } } ,function(err,data){
+                if(err) return console.log(err);
+            });
+            //updateOne({어떤데이터를 수정할지},{ $set / $inc / $min / $rename / etc : { 수정값 } },function({}))
+            // operator  { $set : { totalPost : 바꿀값 } }
+            // operator  { $inc : { totalPost : 기존값에 더해줄 값 } }
     }); 
-        //수정할차례
-
   });
-    
 });
 
 app.get('/list',function(req,res){
     //디비에 저장된 post라는 collection안에 저장된 데이터를 꺼내주세요.
     db.collection('post').find().toArray(function(err,data){
-        console.log(data);
         res.render('list.ejs',{ posts : data });
     });
 
-   
+app.delete('/delete',function(req,res){
+    console.log(req.body);
+    db.collection('post').delete()
+})
     
 })
