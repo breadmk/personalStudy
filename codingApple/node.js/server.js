@@ -82,7 +82,11 @@ app.get('/list',function(req,res){
 
 app.delete('/delete',function(req,res){
     console.log(req.body);
-    db.collection('post').delete()
+    req.body._id = parseInt(req.body._id);
+    db.collection('post').deleteOne(req.body,function(err,result){
+        console.log('삭제완료');
+        res.status(200).send({ message : '성공했습니다.' });
+    });
 })
     
 })
