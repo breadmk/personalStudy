@@ -84,9 +84,21 @@ app.delete('/delete',function(req,res){
     console.log(req.body);
     req.body._id = parseInt(req.body._id);
     db.collection('post').deleteOne(req.body,function(err,result){
-        console.log('삭제완료');
+        console.log('삭제완료,cmd');
         res.status(200).send({ message : '성공했습니다.' });
+        // res.status(400).send({ message : '실패했습니다.' });
     });
-})
+});
+
+app.get('/detail/:no',function(req,res){
+    db.collection('post').findOne( { _id : parseInt(req.params.no) },function(err,result){
+        console.log(result);
+        res.render('detail.ejs', {data:result});
+        if( result == null ){
+            res.send({message : "요청하신 페이지가 없습니다."});
+        }
+    });
+   
+});
     
 })
