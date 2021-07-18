@@ -1,3 +1,12 @@
 회원인증 방법
 
 1. session-based
+- session / cookies  서버에 다 저장하는 부분이 단점이자 장점.
+
+2. token-based(JWT) [ json web token ]
+- 로그인시 Json Wen Token 발행 => token 검사 => auth // user의 로그인 상태를 저장하지 않음.
+
+3. Open Authentication(OAuth)
+- 다른 사이트의 프로필 정보를 가져오는 방식. // pw 저장을 하지 않아도 됨. 단점은 없어지는 다른 사이트들 존재함.
+
+
