@@ -19,9 +19,10 @@
 
         <div class="container mt-4">
 
-            <form action="/add?_method=PUT" method="post">
+            <form action="/edit?_method=PUT" method="post">
                 <div class="form-group">
                     <label>오늘의 할일</label>
+                    <input type="text" name="no" style="display: none;" value="<%=get._id%>">
                     <input type="text" class="form-control" name="title" value="<%=get.제목%>">
                 </div>
                 <div class="form-group">

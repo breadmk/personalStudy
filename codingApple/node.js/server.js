@@ -60,23 +60,23 @@ app.get('/write',function(요청,응답){
     응답.render('write.ejs');
 });
 
-app.post('/add',function(요청,응답){
-    응답.send('전송완료')
+app.post('/add',function(요청,res){
+        //updateOne({어떤데이터를 수정할지},{ $set / $inc / $min / $rename / etc : { 수정값 } },function({}))
+        // operator  { $set : { totalPost : 바꿀값 } }
+        // operator  { $inc : { totalPost : 기존값에 더해줄 값 } }
+    // res.send('전송완료')
     db.collection('counter').findOne({name : '게시물갯수'},function(err,data){
         console.log(data.totalPost);
         let totalCount = data.totalPost;
-
         db.collection('post').insertOne( { _id:totalCount+1, 제목:요청.body.title,날짜:요청.body.date} ,function(에러,결과){ 
             console.log('저장완료');
             db.collection('counter').updateOne({ name : '게시물갯수' },{ $inc : { totalPost : 1 } } ,function(err,data){
                 if(err) return console.log(err);
             });
-            //updateOne({어떤데이터를 수정할지},{ $set / $inc / $min / $rename / etc : { 수정값 } },function({}))
-            // operator  { $set : { totalPost : 바꿀값 } }
-            // operator  { $inc : { totalPost : 기존값에 더해줄 값 } }
-    }); 
-  });
-});
+            res.redirect("/list")
+         }); 
+       });
+    });
 
 app.get('/list',function(req,res){
     //디비에 저장된 post라는 collection안에 저장된 데이터를 꺼내주세요.
@@ -109,5 +109,13 @@ app.get('/edit/:no',function(req,res){
     db.collection('post').findOne( {_id : parseInt(req.params.no) }, function(err,result){
         res.render('edit.ejs', {get:result});
     });
-    
+});
+
+
+app.put('/edit',function(req,res){
+    // 폼에담긴 제목데이터,날짜 데이터를 가지고 db.collection 에다가 업데이트를 하자.
+    db.collection('post').updateOne({ _id: parseInt(req.body.no)  },{ $set : { 제목: req.body.title, 날짜: req.body.date } },function(err,result){
+        console.log('수정완료');
+        res.redirect('/list');
+    });
 });
