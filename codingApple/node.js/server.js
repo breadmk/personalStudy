@@ -60,7 +60,7 @@ app.get('/write',function(요청,응답){
     응답.render('write.ejs');
 });
 
-app.post('/add',function(요청,res){
+app.post('/add',function(요청,res){ //res는 한번만 사용가능하다.
         //updateOne({어떤데이터를 수정할지},{ $set / $inc / $min / $rename / etc : { 수정값 } },function({}))
         // operator  { $set : { totalPost : 바꿀값 } }
         // operator  { $inc : { totalPost : 기존값에 더해줄 값 } }
@@ -119,3 +119,76 @@ app.put('/edit',function(req,res){
         res.redirect('/list');
     });
 });
+
+// 회원 관련 소스
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+
+//미들웨어 사용
+// app.use(미들웨어)
+// 웹서버는 요청- 응답해주는 머신
+// 미들웨어 :  요청-응답 중간에 뭔가 실행되는 코드
+
+app.use(session({secret : '비밀코드' , resave : true , saveUninitialized : false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/login',function(req,res){
+    res.render('login.ejs');
+});
+
+// passport : 로그인 기능 쉽게 구현 도와줌. 로그인 하면 아이디 및 비밀번호 검사.
+app.post('/login', passport.authenticate('local',{  //local 방식으로 인증해주세요.
+    failureRedirect : '/fail' // 회원 인증 실패하면 /fail 로 이동.
+}),function(req,res){
+   res.redirect('/');
+});
+
+passport.use(new LocalStrategy({  // 인증하는 방법을 Strategy 라고함.
+    usernameField : 'id',   // <input type="text" class="form-control" name="id"> name=속성
+    passwordField : 'pw',   // <input type="password" class="form-control" name="pw"> name=속성
+    session : true,         // 로그인 후 세션을 저장할 것인지 여부
+    passReqToCallback : false,  // 아이디 / 비번 말고 다른거 검증시 true 
+}, function(inputId, inputPw, done){ // 위가 true의 경우 inputId앞에 파라미터 추가
+    console.log(inputId, inputPw);
+    db.collection('login').findOne( { id : inputId }, function(err,result){
+        if(err) return done(err);
+        // done(서버에러,성공시 사용자 DB 데이터/실패시 false, 에러메세지) 
+        if(!result) return done(null,false, {message : '존재하지 않는 아이디입니다'})
+        if(inputPw == result.pw){
+            return done(null, result); //result가 아래 user로 들어감.
+        }else{
+            return done(null,false, { message : '비밀번호가 틀렸습니다.'} )
+        }
+    })
+}));
+// 위에 코드는 보안이 처참함. 원래는 보안화 해야함.
+// 로그인 성공 -> 세션정보를 만듦 -> 마이페이지 방문시 세션검사
+
+passport.serializeUser(function(user,done){ //세션을 저장하는 코드(로그인 성공시 발동)
+    done(null,user.id); //user.id 라는 이름으로 세션을 만듬.
+});
+
+// 이 세션 데이터를 가진 사람을 DB에서 찾아주세요(마이페이지 접속시 발동)
+passport.deserializeUser(function(id,done){
+    db.collection('login').findOne( {id : id},function(err,result){
+        // console.log(result);
+        done(null,result);
+    })
+    
+});
+
+app.get('/mypage', loginChk, function (req, res) {
+  console.log(req.user);
+  res.render('mypage.ejs', { 사용자:req.user});
+}) 
+
+//미들웨어
+function loginChk(req,res,next){
+    if(req.user){
+        next(); //통과
+    }else{
+        res.send('로그인 하세요');
+    }
+}
