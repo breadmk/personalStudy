@@ -1,6 +1,6 @@
 회원인증 방법
 
-1. session-based
+1. session-based (현강의)
 - session / cookies  서버에 다 저장하는 부분이 단점이자 장점.
 
 2. token-based(JWT) [ json web token ]
