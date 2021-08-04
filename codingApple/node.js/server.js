@@ -145,6 +145,7 @@ app.post('/login', passport.authenticate('local',{  //local 방식으로 인증�
    res.redirect('/');
 });
 
+
 passport.use(new LocalStrategy({  // 인증하는 방법을 Strategy 라고함.
     usernameField : 'id',   // <input type="text" class="form-control" name="id"> name=속성
     passwordField : 'pw',   // <input type="password" class="form-control" name="pw"> name=속성
