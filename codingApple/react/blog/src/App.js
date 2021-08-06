@@ -10,17 +10,24 @@ function App() {
   let [like,likeChange] = useState(0);
   let posts = '강남 고기 맛집';
   let css = { color : 'red', fontSize : '30px' }
+  let [modal,modal변경] = useState(false);
 
   function num(){
     return 100
   }
-  
+
+  function changeTitle(){
+    var newArray = [...title]; //deep copy
+    newArray[0] = '여자 코트 추천'
+    titleChange(newArray);
+  }
+
   return (
     <div className="App">
       <div className="black-nav">
         <div style={ css }>개발 Blog</div>
       </div>
-      <button onClick={ ()=>{}}>변경</button>
+      <button onClick={ changeTitle }>변경</button>
       {/* <img src= { logo } /> */}
       {/* <h4> { num() } </h4> */}
        <div className="list">
@@ -34,12 +41,30 @@ function App() {
         <hr/>
        </div> 
         <div className="list">
-        <h3>{ title[2] }</h3>
+        <h3 onClick={ ()=>{ modal변경(true) }}>{ title[2] }</h3>
         <p>2월 19일 발행</p>
         <hr/>
       </div>
+
+    <button onClick={ ()=>{ modal변경((!modal)) } }>버튼</button>
+    {
+      modal===true
+      ?<Modal />
+      :null
+    }
+
     </div>
   );
+}
+
+function Modal(){
+  return(
+    <div className="modal">
+      <h2>제목</h2>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  )
 }
 
 export default App;
