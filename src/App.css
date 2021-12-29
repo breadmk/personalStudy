@@ -1,6 +1,13 @@
-.jumbotron{
-  height: 300px;
+.App {
+  text-align: center;
+}
+
+.jumbotron {
+  height: 380px;
   width: auto;
   background-color: rgba(220, 238, 255, 0.808);
   text-align: center;
+  background-image: url("./img/background.jpg");
+  background-size: cover;
+  color: white;
 }
